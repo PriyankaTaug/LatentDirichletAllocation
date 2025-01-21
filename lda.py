@@ -12,7 +12,7 @@ import re
 import gensim.corpora as corpora
 import pandas as pd
 
-
+# Load Data
 # Read csv file
 data = pd.read_csv('news_articles.csv')
 data.head()
