@@ -18,3 +18,17 @@ data = pd.read_csv('news_articles.csv')
 data.head()
 data.info()
 
+# Clean Data
+articles =  data['content'].str.lower().apply(lambda x : re.sub(r"([^\w\s])","",x))
+
+# Stopwords removal
+en_stopwords =  stopwords.words('english')
+articles  = articles.apply(lambda x :''.join([word for word in x.split() if word not in (en_stopwords)]))
+
+
+# tokenize
+articles = articles.apply(lambda x: word_tokenize)
+
+# stemming (done for speed as we have a lot of text)
+ps = PorterStemmer()
+articles = articles.apply(lambda tokens: [ps.stem(token) for token in tokens])
